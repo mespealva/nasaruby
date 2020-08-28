@@ -25,26 +25,30 @@ def build_page(hash)
     #    image.push("<li><img src='#{img['img_src']}'></li>")
         cards ="
             <div class='col-md-4 p-3'>
-                <div class='card bg-light' style='width: 18rem;'>
-                    <img src='#{img['img_src']}' class='card-img-top' alt='...'>
-
+            <div class='card bg-dark text-white'>
+            <img src='#{img['img_src']}' class='card-img' alt='...'>
+            <div class='card-img-overlay'>
+                <h5 class = 'card-tittle'>Fecha terrestre</h5>
+                <p>#{img['earth_date']}</p>
                 </div>
-            </div>"
+            </div></div>"
             image.push(cards)
     end
-    en ="</div></div>"
+    en ="</div>
+    </div>"
     head = "<!doctype html>
     <html lang='en'>
     <head>
-        <title>Nasa</title>
+        <title>Nasa: Mil Soles</title>
         <!-- Required meta tags -->
         <meta charset='utf-8'>
         <meta name='viewport' content='width=device-width, initial-scale=1, shrink-to-fit=no'>
-
+        <link href='https://fonts.googleapis.com/css2?family=Kaushan+Script&display=swap' rel='stylesheet'>
         <!-- Bootstrap CSS -->
         <link rel='stylesheet' href='https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css' integrity='sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T' crossorigin='anonymous'>
     </head>
-    <body style='background-color:black;'>
+    <body style='background-color:black; font-family: Kaushan Script, cursive;'>
+        <div class='p-3 mb-2 bg-secondary text-white text-center'>Mil Soles</div>
         <h1 class='text-center text-white'>Fotos de Curiosity</h1>
         <ul>
         "
