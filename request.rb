@@ -19,9 +19,20 @@ end
 
 def build_page(hash)
     image = []
+    op= '<div class="container">'+
+            '<div class="row">'
     hash ['photos'].each do |img|
-        image.push("<li><img src='#{img['img_src']}'></li>")
+    #    image.push("<li><img src='#{img['img_src']}'></li>")
+        cards ="
+            <div class='col-md-4 p-3'>
+                <div class='card bg-light' style='width: 18rem;'>
+                    <img src='#{img['img_src']}' class='card-img-top' alt='...'>
+
+                </div>
+            </div>"
+            image.push(cards)
     end
+    en ="</div></div>"
     head = "<!doctype html>
     <html lang='en'>
     <head>
@@ -33,8 +44,8 @@ def build_page(hash)
         <!-- Bootstrap CSS -->
         <link rel='stylesheet' href='https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css' integrity='sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T' crossorigin='anonymous'>
     </head>
-    <body>
-        <h1 class='text-center'>Fotos de Curiosity</h1>
+    <body style='background-color:black;'>
+        <h1 class='text-center text-white'>Fotos de Curiosity</h1>
         <ul>
         "
     foot = "
@@ -44,7 +55,7 @@ def build_page(hash)
             <script src='https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js' integrity='sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM' crossorigin='anonymous'></script>
           </body>
         </html>"
-    index = "#{head} #{image.join("\n")} #{foot}"
+    index = "#{head}#{op}#{image.join("\n")} #{en} #{foot}"
 
     File.write('index.html', index)
 end
