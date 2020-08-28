@@ -25,7 +25,7 @@ def build_page(hash)
     #    image.push("<li><img src='#{img['img_src']}'></li>")
         cards ="
             <div class='col-md-4 p-3'>
-            <div class='card bg-dark text-white'>
+            <div class='card bg-dark text-white' style='height:21rem;'>
             <img src='#{img['img_src']}' class='card-img' alt='...'>
             <div class='card-img-overlay'>
                 <h5 class = 'card-tittle'>Fecha terrestre</h5>
@@ -63,19 +63,9 @@ def build_page(hash)
 end
 
 def photo_count(hash)
-    contador = []
-    hash["photos"].map!{|photo| [photo["camera"]]}
-    hash["photos"].each do |data|
-        data.each do |cam|
-            cam.each do |k,v|
-                contador.push(v) if k == "name"
-            end
-        end
-    end
-    camaras = contador.group_by {|x| x}
-    camaras.each do |k,v|
-        camaras[k] = v.count
-    end
+    hash["photos"].map!{|photo| photo["camera"]["name"]}
+    camaras = hash["photos"].group_by {|x| x}
+    camaras.each {|k,v| camaras[k] = v.count}
     return camaras
 end
 
