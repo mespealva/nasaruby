@@ -20,14 +20,19 @@ end
 def build_page(hash)
     image = []
     hash ['photos'].each do |img|
-        image.push("\t<li><img src='#{img['img_src']}'></li>")
+        image.push("<li><img src='#{img['img_src']}'></li>")
     end
     head = "<html>
     <head>
         <title>Nasa</title>
     </head>
-        <body>"
-    foot = "\n</ul>\n</body>\n</html>"
+        <body>
+            <ul>
+        "
+    foot = "
+            </ul>
+        </body>
+    </html>"
     pag = "#{head} #{image.join("\n")} #{foot}"
 
     File.write('index.html', pag)
