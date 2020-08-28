@@ -18,12 +18,11 @@ def request(url_address, api_key)
 end
 
 def build_page(hash)
-    image = []
+    cards = ""
     op= '<div class="container">'+
             '<div class="row">'
-    hash ['photos'].each do |img|
-    #    image.push("<li><img src='#{img['img_src']}'></li>")
-        cards ="
+    hash['photos'].each do |img|
+        cards +="
             <div class='col-md-4 p-3'>
             <div class='card bg-dark text-white' style='height:21rem;'>
             <img src='#{img['img_src']}' class='card-img' alt='...'>
@@ -32,7 +31,6 @@ def build_page(hash)
                 <p>#{img['earth_date']}</p>
                 </div>
             </div></div>"
-            image.push(cards)
     end
     en ="</div>
     </div>"
@@ -57,12 +55,12 @@ def build_page(hash)
             <script src='https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js' integrity='sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM' crossorigin='anonymous'></script>
           </body>
         </html>"
-    index = "#{head}#{op}#{image.join("\n")} #{en} #{foot}"
+    index = "#{head}#{op}#{cards}#{en}#{foot}"
 
     File.write('index.html', index)
 end
 
-def photo_count(hash)
+def photos_count(hash)
     hash["photos"].map!{|photo| photo["camera"]["name"]}
     camaras = hash["photos"].group_by {|x| x}
     camaras.each {|k,v| camaras[k] = v.count}
@@ -74,5 +72,5 @@ nasa = "https://api.nasa.gov/mars-photos/api/v1/rovers/curiosity/photos?sol=1000
 
 data = request(nasa, api_key)
 build_page(data)
-print photo_count(data)
+print photos_count(data)
 puts
